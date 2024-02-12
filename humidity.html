@@ -1,0 +1,25 @@
+import time
+
+# Function to read humidity from sensor (replace this with actual sensor reading code)
+def read_humidity():
+    # Simulating humidity reading
+    humidity = 50 + (time.time() % 10)  # Simulating fluctuating humidity values
+    return humidity
+
+# Main function
+def main():
+    file_path = "humidity_log.txt"  # Path to the log file
+
+    # Open the log file in append mode
+    with open(file_path, "a") as file:
+        # Continuously read and log humidity data
+        while True:
+            humidity = read_humidity()  # Read humidity from sensor
+            timestamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())  # Get current timestamp
+            log_entry = f"{timestamp} - Humidity: {humidity}%\n"  # Create log entry
+            file.write(log_entry)  # Write log entry to file
+            print("Logged:", log_entry.strip())  # Print logged data (stripping newline character)
+            time.sleep(5)  # Wait for 5 seconds before next reading
+
+if __name__ == "__main__":
+    main()
